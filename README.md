@@ -26,13 +26,16 @@ When running `composer install` or `composer update`, this will create the
 necessary `.pth` files so that the libraries get added to the XP framework's
 class path. This will be visible in the output:
 
-```
+```sh
+$ composer install
 Installing dependencies
-   - Installing xp-forge/gsa-xmlfeed (1.0.0)
+  - Installing xp-forge/gsa-xmlfeed (1.0.0)
     Downloading: 100%
     Unpacking archive
     Cleaning up
 
     XP Class path <vendor/xp-forge/gsa-xmlfeed/src/main/php>
     XP Class path <vendor/xp-forge/gsa-xmlfeed/src/test/php>
+Writing lock file
+Generating autoload files
 ```
