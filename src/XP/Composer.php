@@ -53,12 +53,12 @@
     public static function postPackageInstall(Event $event) {
       $package= $event->getOperation()->getPackage();
       $out= $event->getIO();
+      $cwd= realpath(getcwd());
 
       if ('xp-module' === $package->getType()) {
 
         // Calculate paths
         $target= realpath($event->getComposer()->getInstallationManager()->getInstallPath($package));
-        $cwd= realpath(getcwd());
         $rel= strtr(self::findShortestPath($target, $cwd), DIRECTORY_SEPARATOR, '/').'/';
 
         // Create .pth file from all .pth files inside package
