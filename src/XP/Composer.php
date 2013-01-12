@@ -55,7 +55,6 @@
       $out= $event->getIO();
 
       if ('xp-module' === $package->getType()) {
-        $out->write('[XP] Handling '.$event->getName().' '.$package->getUniqueName());
 
         // Calculate paths
         $target= realpath($event->getComposer()->getInstallationManager()->getInstallPath($package));
@@ -65,9 +64,10 @@
         // Create .pth file from all .pth files inside package
         $pth= fopen(self::path($cwd, self::pthFileFor($package)), 'wb');
         foreach (glob(self::path($target, '*.pth')) as $pthfile) {
-          $out->write('[XP] '.$pthfile); 
           foreach (file($pthfile) as $line) {
             if ('' === $line || '#' === $line{0}) continue;
+
+            $out->write('    Class path <'.$line.'>');
             if ('!' === $line{0}) {
               fwrite($pth, '!'.$rel.$line);
             } else if ('~' === $line{0}) {
@@ -79,7 +79,11 @@
         }
         fclose($pth);
       } else {
-        // DEBUG $out->write('[XP] Not handling '.$package->getType().' ');
+        $pth= fopen(self::path($cwd, 'composer.pth'), 'wb');
+        fwrite($pth, "vendor/autoload.php\n");
+        fclose($pth);
+
+        $out->write('    Class path @autoload');
       }
     }
 
