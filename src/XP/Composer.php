@@ -67,7 +67,7 @@
           foreach (file($pthfile) as $line) {
             if ('' === $line || '#' === $line{0}) continue;
 
-            $out->write('    Class path <'.$line.'>');
+            $out->write('    XP Class path <'.$rel.rtrim($line).'>');
             if ('!' === $line{0}) {
               fwrite($pth, '!'.$rel.$line);
             } else if ('~' === $line{0}) {
