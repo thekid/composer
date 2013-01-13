@@ -39,3 +39,9 @@ Installing dependencies
 Writing lock file
 Generating autoload files
 ```
+
+For all other libraries, the scripts above will generate a `composer.pth` 
+file with a single line containing `vendor/autoload.php`. This will be 
+required with [pull request 218 merged](https://github.com/xp-framework/xp-framework/pull/218).
+This way, their classes can also be used inside XP Technology code 
+seamlessly.
